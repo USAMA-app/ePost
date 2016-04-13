@@ -1,27 +1,31 @@
-$(function(){
-	$("#footerInclude").load("includes/footer-bar.html"); 
-});
+servicesUrl = "http://mydomain.com:8080/ePostServices/rest";
+
 $(document).ready(function() {
-	document.title = 'Bootstrap Example Blah';
+	$(function() {
+		$("#footerInclude").load("includes/footer-bar.html"); 
+		$("#logoHeader").load("includes/logo-header.html"); 
+	});
+
+	document.title = 'ePost Web Mail Services';
+
 	$("<link/>", {
 	   rel: "stylesheet",
 	   type: "text/css",
 	   href: "css/bootstrap.css"
 	}).appendTo("head");
+
 	$("<link/>", {
 	   rel: "stylesheet",
 	   type: "text/css",
 	   href: "css/epost-view.css"
 	}).appendTo("head");
+
 	$("<script/>", {
-	   src: "js/bootstrap.js",
+	   src: "js/bootstrap.min.js",
 	}).appendTo("head");
 });
 
-function signinUser(username, password) {
-	var query = 'http://mydomain.com:8080/ePostServices/rest/getCategory/signin';
-	var data = "{\"username\":\""+username+"\",\"password\":\""+password+"\"}";
-
+function ajaxPostCall(query, data, handleResult) {
 	$.ajax({
 		headers: { 
 			'Content-Type': 'application/json' 
@@ -30,8 +34,7 @@ function signinUser(username, password) {
 		'type': 'POST',
 		'data': data,
 		'success': function(data, status) {
-			console.log('success : ', data);
-			$("#navInclude").load("includes/nav-bar.html"); 
+			handleResult(data, status);
 		},
 		'complete': function(data,status) {
 			console.log('complete : ', status);
@@ -39,17 +42,15 @@ function signinUser(username, password) {
 	});
 }
 
-function getUserData() {
-	var query = 'http://mydomain.com:8080/ePostServices/rest/getCategory/getUser';
-
+function ajaxGetCall(query, data, handleResult) {
 	$.ajax({
 		headers: { 
-			'accept': 'application/json' 
+			'accept': 'application/json'
 		},
-		'url': query,
+		'url': query + data,
 		'type': 'GET',
 		'success': function(data, status) {
-			console.log('success : ', data);
+			handleResult(data, status);
 		},
 		'complete': function(data,status) {
 			console.log('complete : ', status);
