@@ -2,16 +2,16 @@ $(document).ready(function() {
 	$("#myBtn").click(function(){
 		var username = $("#evusername").val();
 		var password = $("#evpassword").val();
-		/*To use without Ajax Starts*/
+		/*To use without Ajax Starts
 		if(username == "uzair" && password == "ahmed") {
 			window.location.href = "main.html";
 		} else {
 			$("#errorMsgLoginFailure").removeAttr("hidden");
-		}
+		}*/
 		/*To use without Ajax Ends*/
 		
-		/*To use with Ajax Starts
-		signinUser(username, password);*/
+		/*To use with Ajax Starts*/
+		signinUser(username, password);
 		/*To use with Ajax Ends*/
 	});
 	$("#myBtn").html("Submit");
