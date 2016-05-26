@@ -1,5 +1,61 @@
 /* Add a gray background color and some padding to the footer */
 footer {
-  background-color: #f2f2f2;
+  background-color: rgb(235,43,54);
   padding: 25px;
+  color: white ;
+}
+
+body{
+	background-color: rgba(235,43,54,1);
+}
+
+.headersColor{
+
+	background-color: rgb(235,43,54);
+
+}
+
+
+.headersColor {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  color: white;
+  background-color: rgb(235,43,54);
+}
+.headersColor h1,
+.headersColor .h1 {
+  color: inherit;
+}
+.headersColor p {
+  margin-bottom: 15px;
+  font-size: 21px;
+  font-weight: 200;
+}
+.headersColor > hr {
+  border-top-color: #d5d5d5;
+}
+.container .headersColor,
+.container-fluid .headersColor {
+  padding-right: 15px;
+  padding-left: 15px;
+  border-radius: 6px;
+}
+.headersColor .container {
+  max-width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .headersColor {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .container .headersColor,
+  .container-fluid .headersColor {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+  .headersColor h1,
+  .headersColor .h1 {
+    font-size: 63px;
+  }
 }
