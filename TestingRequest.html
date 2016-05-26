@@ -1,0 +1,100 @@
+<html>
+<head>
+<script src="js/jquery-1.12.0.min.js"></script>
+	<script src="js/ev-epost-view.js"></script>
+	<script src="js/ev-index.js"></script>
+<script type="text/javascript" src="js/TestingJs.js"></script>
+<title>Testing Request</title>
+</head>
+
+<body>
+	
+		<input type="Text" id="ID" />
+
+			<button id="btn" >Button</button>
+
+<div style="margin-left:20px;" id="d"></div>
+
+
+
+<div>
+
+<form role="form" class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 ng-pristine ng-valid">
+
+                                    <div class="form-group">
+
+                                        <div id="postcode_lookup">
+                                        <input type="text" id="opc_input" value="Enter your Postcode" class="form-control" autocomplete="off" style="color:#CBCBCB;"><button id="opc_button" type="button" class="btn btn-default btn-teplok" onclick="return false;">Find address</button><select id="opc_dropdown" class="form-control"></select></div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="line1" class="control-label">First Address Line</label>
+
+                                        <input type="text" class="form-control" id="line1">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="line1" class="control-label">Second Address Line</label>
+
+                                        <input type="text" class="form-control" id="line2">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="line1" class="control-label">Third Address Line</label>
+                                        <input type="text" class="form-control" id="line3">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="line1" class="control-label">Town</label>
+                                        <input type="text" class="form-control" id="town">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="line1" class="control-label">County</label>
+                                        <input type="text" class="form-control" id="county">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="line1" class="control-label">Postcode</label>
+
+                                        <input type="text" class="form-control" id="postcode-demo">
+
+                                    </div>
+                                </form>
+
+</div>
+
+<script src="https://getaddress.io/js/jquery.getAddress-2.0.1.min.js"></script>
+
+<!-- Add after your form -->
+<script>
+$('#postcode_lookup').getAddress({
+    api_key: '4rwVhqnIkEqj0m_NRNL-Qw4022', 
+    output_fields:{
+        line_1: '#line1',
+        line_2: '#line2',
+        line_3: '#line3',
+        post_town: '#town',
+        county: '#county',
+        postcode: '#postcode'
+    },
+<!--  Optionally register callbacks at specific stages -->                                                                                                               
+    onLookupSuccess: function(data){
+
+    	$("#Divs").append(data);
+
+    },
+    onLookupError: function(){document.write("Error")},
+    onAddressSelected: function(elem,index){/* Your custom code */}
+});
+</script>
+
+<div id="Divs"> </div>
+
+</body>
+
+</html>

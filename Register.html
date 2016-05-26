@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <script src="js/jquery-1.12.0.min.js"></script>
+    <script src="js/ev-epost-view.js"></script>
+    <script src="js/ev-index.js"></script>
+    <script src="js/Registration.js"></script>
+    <script src="js/addressio.js"></script>
+
+    <script type="text/javascript">
+        function myFunction() {
+            var pass1 = document.getElementById("password").value;
+            var pass2 = document.getElementById("confirm_password").value;
+            var ok = true;
+            if (pass1 != pass2) {
+                //alert("Passwords Do not match");
+                document.getElementById("password").style.borderColor = "#E34234";
+                document.getElementById("confirm_password").style.borderColor = "#E34234";
+                ok = false;
+				$("#password-mismatch").removeAttr("hidden");
+            } else {
+                document.getElementById("password").style.borderColor = "#ccc";
+                document.getElementById("confirm_password").style.borderColor = "#ccc";
+				$('#password-mismatch').attr('hidden', 'true');
+            }
+			
+			if($("#opc_dropdown") == undefined || $( "#opc_dropdown option:selected" ).val() == undefined
+				|| $( "#opc_dropdown option:selected" ).val() == "open") {
+				$("#drp-error").removeAttr("hidden");
+				ok=false;
+			} else {
+				$("#drp-error").attr('hidden', 'true');
+			}
+            return ok;
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div id="navInclude"></div>
+    <div id="logoHeader"></div>
+    <div class="container">
+
+
+        <h3 style="color:white;">Applying For House Registration</h3>
+
+        <br/>
+        <br/>
+
+
+        <form role="form" action="RequestSubmit.html" class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 ng-pristine ng-valid">
+
+            <div id="postcode_lookup" style="width:600px;">
+
+                <label style="color:white;" class="control-label" style="align:left;"> Postal Address</label>
+
+				<div hidden="true" id="drp-error" class="bg-danger">Please select your address...</div>
+
+            </div>
+
+            <br/>
+
+            <label style="color:white;" class="contol-label"> Full Name </label>
+
+            <input id="fullname" type="text" class="form-control" required="true" />
+
+            <label style="color:white;" class="contol-label"> Email Address </label>
+
+            <input id="email" type="email" class="form-control" required/>
+
+            <label style="color:white;" class="contol-label"> Username </label>
+
+            <input id="username" maxlength="12" type="text" class="form-control" required/>
+
+            <label style="color:white;" class="contol-label"> Password </label>
+            <input id="password" minlength="8" type="password" class="form-control" required/>
+
+            <p hidden id="password-mismatch" class="bg-danger">Password mismatched...</p>
+			<label style="color:white;" class="contol-label">Confirm Password </label>
+            <input id="confirm_password" onblur="myFunction()" type="password" minlength="8" class="form-control" value="" required/>
+
+            <br/>
+<div style="color:white;">
+            <input type="checkbox" id="checkbox1" required/>I Aggree With All Terms And Condition</div>
+
+            <br/>
+
+            <input type="submit" value="submit" class="btn btn-default" id="submit">
+
+        </form>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+                $("#submit").click(function() {
+
+                    if (myFunction() == true 
+						&& $("#opc_dropdown") != undefined
+						&& $( "#opc_dropdown option:selected" ).val() != undefined
+						&& $( "#opc_dropdown option:selected" ).val() != "open"
+						&& $("#opc_input").val() != "" 
+						&& $("#fullname").val() != "" 
+						&& $("#email").val() != "" 
+						&& $("#checkbox1").is(":checked") == true
+						&& $("#password").val() != "" 
+						&& $("#opc_dropdown").val() != 0 
+						&& $("#username").val().length <= 12) {
+
+                        Send($("#opc_dropdown option:selected" ).text(), $("#username").val(), $("#password").val(), $("#fullname").val(), $("#email").val());
+
+                    } else {
+                        //alert("Something");
+                    }
+
+                });
+
+            });
+        </script>
+
+        <br/>
+
+        <script>
+            $('#postcode_lookup').getAddress({
+                api_key: 'uYXgWRbfH0K6Mn6H3gNQ6g4347',
+                output_fields: {
+                    postcode: '#postcode'
+                },
+                <!--  Optionally register callbacks at specific stages -->                                                                                                               
+                onLookupSuccess: function(data, status) {
+
+                    $("#Divs").append(data);
+
+                },
+                onLookupError: function() {
+                    document.write("Error")
+                },
+                onAddressSelected: function(elem, index) { /* Your custom code */ }
+            });
+        </script>
+
+        <div id="divs"></div>
+
+
+
+
+    </div>
+    <!-- /container -->
+    <div id="footerInclude"></div>
+
+</body>
+
+</html>
